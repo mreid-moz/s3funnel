@@ -103,8 +103,6 @@ def main():
         aws_key = options.aws_key
     if options.aws_secret_key:
         aws_secret_key = options.aws_secret_key
-    if None in [aws_key, aws_secret_key]:
-        parser.error("Missing required arguments `aws_key` or `aws_secret_key`")
 
     ## Threads
     if options.numthreads < 1:

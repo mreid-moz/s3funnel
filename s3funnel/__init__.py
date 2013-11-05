@@ -2,6 +2,7 @@ import logging
 log = logging.getLogger(__name__)
 
 import boto
+from boto.s3.connection import S3Connection
 import workerpool
 
 from boto.exception import BotoServerError, BotoClientError, S3ResponseError
@@ -52,6 +53,12 @@ class S3ToolBox(object):
         if self.conn: return self.conn
 
         log.debug("Starting new S3 connection.")
+        if self.aws_key is None:
+            # Use external boto credentials (either IAM role or ~/.boto)
+            self.conn = S3Connection(is_secure=self.secure)
+        else:
+            # Use supplied credentials
+            self.conn = boto.connect_s3(self.aws_key, self.aws_secret_key, is_secure=self.secure)
         self.conn = boto.connect_s3(self.aws_key, self.aws_secret_key, is_secure=self.secure)
         return self.conn
 
