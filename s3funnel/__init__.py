@@ -59,7 +59,6 @@ class S3ToolBox(object):
         else:
             # Use supplied credentials
             self.conn = boto.connect_s3(self.aws_key, self.aws_secret_key, is_secure=self.secure)
-        self.conn = boto.connect_s3(self.aws_key, self.aws_secret_key, is_secure=self.secure)
         return self.conn
 
     def get_bucket(self, name):
