@@ -13,6 +13,8 @@ from exceptions import FunnelError
 
 from jobs import GetJob, PutJob, DeleteJob, CopyJob
 
+from datetime import datetime
+
 __all__ = ['GetJob','PutJob','DeleteJob','S3ToolBox','BucketFunnel']
 
 # Helpers
@@ -110,6 +112,8 @@ class S3Funnel(object):
         toolbox = S3ToolBox(self.aws_key, self.aws_secret_key, self.secure)
         self._get_conn = toolbox.get_conn
         self._get_bucket = toolbox.get_bucket
+
+        datetime.strptime('', '')
 
     def shutdown(self):
         if self.pool:
